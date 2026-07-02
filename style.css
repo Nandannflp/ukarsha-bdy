@@ -351,20 +351,71 @@ body {
 
 .media-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 .media-item {
     background: rgba(255, 255, 255, 0.2);
     backdrop-filter: blur(10px);
-    height: 200px;
     border-radius: 20px;
+    overflow: hidden;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    font-weight: bold;
     border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.media-item:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+.media-content {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    background-color: rgba(0,0,0,0.1); /* fallback if image not found */
+}
+
+.media-caption {
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-align: center;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+/* Polaroid Style Variation */
+.polaroid-style {
+    background: white;
+    padding: 15px 15px 0 15px;
+    border-radius: 5px; /* sharp edges for polaroid */
+    transform: rotate(-3deg);
+}
+.polaroid-style:nth-child(even) {
+    transform: rotate(3deg);
+}
+.polaroid-style:hover {
+    transform: scale(1.05) rotate(0deg);
+}
+.polaroid-style .media-caption {
+    color: #333; /* Dark text for polaroid caption */
+    text-shadow: none;
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    padding: 15px 10px;
+}
+
+/* Emoji Spam */
+.emoji-spam {
+    font-size: 4rem;
+    margin-top: 3rem;
+    letter-spacing: 1rem;
 }
 
 /* Responsive */
