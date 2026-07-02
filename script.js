@@ -1,23 +1,21 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- 1. Theme Toggle (Light/Dark Mode) ---
-    const themeToggleBtn = document.getElementById('theme-toggle');
+    const themeCheckbox = document.getElementById('theme-checkbox');
     const body = document.body;
     
     // Check local storage for theme preference
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'dark') {
         body.classList.replace('light-mode', 'dark-mode');
-        themeToggleBtn.textContent = '☀️';
+        themeCheckbox.checked = true;
     }
 
-    themeToggleBtn.addEventListener('click', () => {
-        if (body.classList.contains('light-mode')) {
+    themeCheckbox.addEventListener('change', () => {
+        if (themeCheckbox.checked) {
             body.classList.replace('light-mode', 'dark-mode');
-            themeToggleBtn.textContent = '☀️';
             localStorage.setItem('theme', 'dark');
         } else {
             body.classList.replace('dark-mode', 'light-mode');
-            themeToggleBtn.textContent = '🌙';
             localStorage.setItem('theme', 'light');
         }
     });
@@ -31,14 +29,33 @@ document.addEventListener('DOMContentLoaded', () => {
         progressBar.style.width = scrollPercent + '%';
     });
 
-    // --- 3. Background Flowers Generator ---
+    // --- 3. Background Flowers Generator (Border Only) ---
     const flowersContainer = document.getElementById('bg-flowers-container');
-    const numFlowers = 15;
+    const numFlowers = 25; // More flowers to form a border
     for (let i = 0; i < numFlowers; i++) {
         const flower = document.createElement('div');
         flower.classList.add('bg-flower');
-        flower.style.left = Math.random() * 100 + 'vw';
-        flower.style.top = Math.random() * 100 + 'vh';
+        
+        // Randomly pick an edge: 0=top, 1=right, 2=bottom, 3=left
+        const edge = Math.floor(Math.random() * 4);
+        let left, top;
+        
+        if (edge === 0) { // Top edge
+            left = Math.random() * 100 + 'vw';
+            top = (Math.random() * 5 - 2) + 'vh'; // Slightly off-screen to slightly on-screen
+        } else if (edge === 1) { // Right edge
+            left = (92 + Math.random() * 8) + 'vw';
+            top = Math.random() * 100 + 'vh';
+        } else if (edge === 2) { // Bottom edge
+            left = Math.random() * 100 + 'vw';
+            top = (92 + Math.random() * 8) + 'vh';
+        } else { // Left edge
+            left = (Math.random() * 8 - 4) + 'vw';
+            top = Math.random() * 100 + 'vh';
+        }
+
+        flower.style.left = left;
+        flower.style.top = top;
         flower.style.transform = `scale(${Math.random() * 0.5 + 0.5}) rotate(${Math.random() * 360}deg)`;
         flowersContainer.appendChild(flower);
     }
@@ -132,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Hide main content
         mainContent.style.display = 'none';
         progressBar.style.display = 'none';
-        themeToggleBtn.style.display = 'none';
+        document.querySelector('.theme-switch-wrapper').style.display = 'none';
         
         // Show surprise section
         surpriseMode.classList.remove('hidden');
