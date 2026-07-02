@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utkarsha without T</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+</head>
+<body class="light-mode">
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
+    <canvas id="starsCanvas"></canvas>
+    
+    <!-- Floating background flowers -->
+    <div id="bg-flowers-container"></div>
+
+    <div class="scroll-progress"></div>
+
+    <main id="main-content">
+        <section class="story-section hero" id="section-1">
+            <div class="content-wrapper">
+                <div class="image-placeholder main-portrait">
+                    <span>(Your Portrait Image Here)</span>
+                </div>
+                <h1 class="main-title">Meet Ukarsha.</h1>
+                <p class="subtitle">The cute kid who is secretly holding back 99% of her anger. 😤✨</p>
+                <div class="scroll-indicator">
+                    <p>Scroll down</p>
+                    <div class="arrow">↓</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="story-section" id="section-2">
+            <div class="content-wrapper">
+                <h2 class="section-title">The "No T" Identity Crisis</h2>
+                <div class="identity-graphics">
+                    <div class="crossed-out">
+                        <span class="letter">U</span>
+                        <span class="strike letter">T</span>
+                        <span class="letter">KARSHA</span>
+                    </div>
+                    <div class="emoji-big">☕🚫</div>
+                </div>
+                <p class="story-text">To the world, she is Utkarsha.<br>But to me, she's Ukarsha—'Utkarsha without the T'.<br>Coincidentally, she doesn't even drink Tea.<br>Also, she never listens anyway. 🙄</p>
+            </div>
+        </section>
+
+        <section class="story-section" id="section-3">
+            <div class="content-wrapper">
+                <h2 class="section-title">The Origin Story</h2>
+                <div class="date-badge">15th April 2026</div>
+                <div class="location-pin">📍 Cyclone Shelter, Altinho</div>
+                <p class="story-text">The day I met the girl in the pink kurta.</p>
+                <div class="image-placeholder polaroid">
+                    <span>(Pink Kurta Pic Here)</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="story-section" id="section-4">
+            <div class="content-wrapper">
+                <h2 class="section-title">The Marcel Paradox</h2>
+                <div class="map-graphic">
+                    <div class="pin me">📍 Me<br><small>in Marcel</small></div>
+                    <div class="dotted-line"></div>
+                    <div class="pin her">📍 Her<br><small>also in Marcel</small></div>
+                </div>
+                <p class="story-text">We both live in Marcel...<br>Yet somehow it feels like we're in different time zones.</p>
+            </div>
+        </section>
+
+        <section class="story-section" id="section-5">
+            <div class="content-wrapper">
+                <h2 class="section-title">The Speed Skater</h2>
+                <div class="emoji-transition">
+                    <span class="sloth emoji-icon">🦥</span> 
+                    <span class="arrow-icon">➡️</span> 
+                    <span class="skater emoji-icon">🏃‍♀️💨</span>
+                </div>
+                <p class="story-text">The biggest paradox: Can be the laziest person alive.<br>But the moment she starts walking, it's like she has roller skates attached to her feet.</p>
+            </div>
+        </section>
+
+        <section class="story-section finale" id="section-6">
+            <div class="content-wrapper">
+                <h2 class="section-title">Ready for the plot twist?</h2>
+                <button id="surprise-btn" class="magical-btn">Don't Press This</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Phase 2: Surprise Mode -->
+    <div id="surprise-mode" class="hidden">
+        <div class="surprise-content">
+            <h1 class="birthday-title animate-pop">SURPRISE!</h1>
+            <h2 class="birthday-subtitle animate-slide">HAPPY 24TH BIRTHDAY UKARSHA! 🎂✨</h2>
+            <p class="birthday-message animate-fade">Here's to the girl in the pink kurta, the fastest walker in Marcel, and the best 'Utkarsha without a T' anyone could ask for.</p>
+            
+            <div class="media-grid">
+                <div class="media-item">GIF Placeholder</div>
+                <div class="media-item">Funny Pic Placeholder</div>
+                <div class="media-item">Video Placeholder</div>
+                <div class="media-item">🥳🎉✨🤪</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- GSAP for animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Canvas Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

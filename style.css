@@ -1,0 +1,377 @@
+:root {
+    /* Light Mode Variables */
+    --bg-color: #f0f8ff; /* Alice Blue */
+    --text-primary: #1a365d;
+    --text-secondary: #2b6cb0;
+    --accent-color: #4299e1;
+    --card-bg: rgba(255, 255, 255, 0.7);
+    --flower-filter: hue-rotate(0deg) brightness(1);
+    --flower-glow: drop-shadow(0 0 0px rgba(0,0,0,0));
+    --button-bg: linear-gradient(135deg, #4299e1, #3182ce);
+    --button-text: white;
+}
+
+.dark-mode {
+    /* Dark Mode Variables */
+    --bg-color: #0f172a; /* Deep Slate */
+    --text-primary: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent-color: #38bdf8;
+    --card-bg: rgba(30, 41, 59, 0.7);
+    --flower-filter: hue-rotate(-20deg) brightness(1.5) saturate(2);
+    --flower-glow: drop-shadow(0 0 15px rgba(56, 189, 248, 0.8));
+    --button-bg: linear-gradient(135deg, #0ea5e9, #0284c7);
+    --button-text: white;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    transition: background-color 0.8s ease, color 0.8s ease;
+    overflow-x: hidden;
+}
+
+/* Scroll Progress Bar */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 4px;
+    background-color: var(--accent-color);
+    width: 0%;
+    z-index: 1000;
+    transition: width 0.1s;
+    box-shadow: 0 0 10px var(--accent-color);
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 100;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Starry Canvas */
+#starsCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 1s ease;
+}
+
+.dark-mode #starsCanvas {
+    opacity: 1;
+}
+
+/* Background Flowers */
+#bg-flowers-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: -1;
+    overflow: hidden;
+}
+
+.bg-flower {
+    position: absolute;
+    width: 100px;
+    height: 100px;
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%2387CEEB" d="M50 0 C60 30, 80 40, 100 50 C80 60, 60 70, 50 100 C40 70, 20 60, 0 50 C20 40, 40 30, 50 0 Z"/></svg>');
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.3;
+    transition: filter 0.8s ease;
+    filter: var(--flower-filter) var(--flower-glow);
+}
+
+.dark-mode .bg-flower {
+    opacity: 0.5;
+}
+
+/* Main Sections */
+.story-section {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    position: relative;
+    opacity: 0; /* For GSAP */
+    transform: translateY(50px); /* For GSAP */
+}
+
+.content-wrapper {
+    max-width: 800px;
+    text-align: center;
+    background: var(--card-bg);
+    padding: 3rem;
+    border-radius: 24px;
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.dark-mode .content-wrapper {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Typography */
+.main-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 4rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--text-primary), var(--accent-color));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subtitle {
+    font-size: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: var(--accent-color);
+}
+
+.story-text {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-primary);
+}
+
+/* Specific Section Elements */
+.image-placeholder {
+    width: 250px;
+    height: 250px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 20px;
+    margin: 0 auto 2rem auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--text-secondary);
+    border: 2px dashed var(--accent-color);
+}
+
+.polaroid {
+    background: white;
+    padding: 15px 15px 50px 15px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    border: none;
+    transform: rotate(-5deg);
+    transition: transform 0.3s;
+}
+.polaroid:hover {
+    transform: scale(1.05) rotate(0deg);
+}
+.dark-mode .polaroid {
+    background: #e2e8f0;
+    color: #000;
+}
+
+/* Section 2: Identity Graphics */
+.identity-graphics {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    font-size: 3rem;
+    font-weight: 800;
+}
+.strike {
+    text-decoration: line-through;
+    color: red;
+    opacity: 0.7;
+}
+
+/* Section 3: Origin */
+.date-badge {
+    display: inline-block;
+    background: var(--accent-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 30px;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+/* Section 4: Marcel Paradox */
+.map-graphic {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 2rem 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.dotted-line {
+    flex-grow: 1;
+    border-bottom: 3px dashed var(--accent-color);
+    margin: 0 20px;
+}
+.pin {
+    padding: 10px;
+    background: var(--bg-color);
+    border-radius: 10px;
+}
+
+/* Section 5: Skater */
+.emoji-transition {
+    font-size: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+/* Buttons */
+.magical-btn {
+    background: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    padding: 1rem 3rem;
+    font-size: 1.5rem;
+    font-family: 'Outfit', sans-serif;
+    font-weight: bold;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 5px 15px rgba(66, 153, 225, 0.4);
+}
+.magical-btn:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(66, 153, 225, 0.6);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    margin-top: 3rem;
+    opacity: 0.6;
+    animation: bounce 2s infinite;
+}
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-15px); }
+    60% { transform: translateY(-7px); }
+}
+
+/* Phase 2: Surprise Mode */
+#surprise-mode {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3a8a, #0ea5e9, #3b82f6);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    z-index: 2000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+#surprise-mode.hidden {
+    display: none;
+}
+
+.surprise-content {
+    text-align: center;
+    padding: 2rem;
+    max-width: 900px;
+}
+
+.birthday-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 5rem;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.birthday-subtitle {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    color: #fef08a; /* Soft yellow highlight */
+}
+
+.birthday-message {
+    font-size: 1.5rem;
+    line-height: 1.6;
+    margin-bottom: 3rem;
+}
+
+.media-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.media-item {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    height: 200px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .main-title { font-size: 3rem; }
+    .section-title { font-size: 2rem; }
+    .story-text { font-size: 1.1rem; }
+    .birthday-title { font-size: 3.5rem; }
+    .birthday-subtitle { font-size: 1.8rem; }
+}
